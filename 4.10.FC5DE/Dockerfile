@@ -1,23 +1,4 @@
-
-FROM debian:jessie
-
-# Node.js
-RUN apt-get update \
-	&& apt-get install -y --no-install-recommends \
-		curl \
-		ca-certificates \
-	\
-	&& curl -L https://nodejs.org/dist/v4.2.2/node-v4.2.2-linux-x64.tar.gz | tar -zx -C /opt \
-	&& ln -s /opt/node-* /opt/node \
-	&& /opt/node/bin/npm install -g npm \
-	&& rm -rf /root/.npm \
-	&& rm -rf /tmp/* \
-	\
-	&& apt-get purge -y \
-		curl \
-		ca-certificates \
-	&& apt-get autoremove -y \
-	&& rm -rf /var/lib/apt/lists/*
+FROM node:lts-slim
 
 # make & g++
 RUN apt-get update \
